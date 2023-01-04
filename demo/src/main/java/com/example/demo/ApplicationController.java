@@ -32,15 +32,8 @@ public class ApplicationController {
 	}
 	
 	@GetMapping("/customers")
-	public ModelAndView Customers(Model model, 
-		@RequestParam(value="page", defaultValue="0", required = false) Integer page, 
-		@RequestParam(value="size", defaultValue="10", required = false) Integer size,
-		@RequestParam(value="name", defaultValue="customerId", required = false) String column, 
-		@RequestParam(value="sort", defaultValue="ASC", required = false) Sort.Direction direction 
-	){		
+	public ModelAndView Customers(Model model, Pageable pageable){		
 		ModelAndView mav = new ModelAndView("customers");
-		Pageable pageable = PageRequest.of(page, size, direction, column);
-		System.out.println(customerRepository.findAll(pageable).getSort().getOrderFor("name"));
 		mav.addObject("customers", customerRepository.findAll(pageable));
 		return mav;
 	}

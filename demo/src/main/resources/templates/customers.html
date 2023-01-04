@@ -8,11 +8,11 @@
     	<table class="table table-bordered table-hover table=responsive table-striped">
     		<thead>
     			<tr>
-					<th><a th:with="dir=${customers.getSort().getOrderFor('customerId')} == null ? ASC : ( ${customers.getSort().getOrderFor('customerId').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, name=customerId, sort=${dir})}">#</a></th>    				
-					<th><a th:with="dir=${customers.getSort().getOrderFor('name')} == null ? ASC : ( ${customers.getSort().getOrderFor('name').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, name=name, sort=${dir})}">Name</a></th>
-					<th><a th:with="dir=${customers.getSort().getOrderFor('address')} == null ? ASC : ( ${customers.getSort().getOrderFor('address').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, name=address, sort=${dir})}">Address</a></th>
-					<th><a th:with="dir=${customers.getSort().getOrderFor('website')} == null ? ASC : ( ${customers.getSort().getOrderFor('website').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, name=website, sort=${dir})}">Website</a></th>
-					<th><a th:with="dir=${customers.getSort().getOrderFor('creditLimit')} == null ? ASC : ( ${customers.getSort().getOrderFor('creditLimit').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, name=creditLimit, sort=${dir})}">Credit Limit</a></th>
+					<th><a th:with="dir=${customers.getSort().getOrderFor('customerId')} == null ? ASC : ( ${customers.getSort().getOrderFor('customerId').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=customerId + ',' + ${dir})}">#</a></th>    				
+					<th><a th:with="dir=${customers.getSort().getOrderFor('name')} == null ? ASC : ( ${customers.getSort().getOrderFor('name').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=name + ',' + ${dir})}">Name</a></th>
+					<th><a th:with="dir=${customers.getSort().getOrderFor('address')} == null ? ASC : ( ${customers.getSort().getOrderFor('address').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=address + ',' + ${dir})}">Address</a></th>
+					<th><a th:with="dir=${customers.getSort().getOrderFor('website')} == null ? ASC : ( ${customers.getSort().getOrderFor('website').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=website + ',' + ${dir})}">Website</a></th>
+					<th><a th:with="dir=${customers.getSort().getOrderFor('creditLimit')} == null ? ASC : ( ${customers.getSort().getOrderFor('creditLimit').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=creditLimit + ',' + ${dir})}">Credit Limit</a></th>
     			</tr>
     		</thead>
     		<tr th:each=" customer : ${customers} ">
@@ -24,13 +24,12 @@
     		</tr>
     	</table>
     	
-		<div th:if="${customers.totalPages > 0}">
-			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=0)}">|&lt;</a>
-			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=${customers.number} > 0 ? ${customers.number}-1 : 0)}">&lt;</a>
-			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=${customers.number} < ${customers.totalPages}-1 ? ${customers.number}+1 : ${customers.totalPages}-1)}">&gt;</a>
-			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=${customers.totalPages}-1)}">&gt;|</a>
+		<div th:if="${customers.totalPages > 0}" th:with="sort=${customers.getSort().toString().replace(',', '&sort=').replace(': ', ',')}">
+			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=0, sort=${sort})}">|&lt;</a>
+			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=${customers.number} > 0 ? ${customers.number}-1 : 0, sort=${sort})}">&lt;</a>
+			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=${customers.number} < ${customers.totalPages}-1 ? ${customers.number}+1 : ${customers.totalPages}-1, sort=${sort})}">&gt;</a>
+			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=${customers.totalPages}-1, sort=${sort})}">&gt;|</a>
 		</div>    	
 
-    	<a th:href="@{/customers(size=${customers.size}, page=0, sort=${customers.getSort()})}" th:text="${customers.getSort()}"></a>
     </body>
 </html>
