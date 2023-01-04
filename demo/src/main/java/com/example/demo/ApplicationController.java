@@ -1,15 +1,13 @@
 package com.example.demo;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -35,16 +33,15 @@ public class ApplicationController {
 	
 	@GetMapping("/customers")
 	public ModelAndView Customers(Model model, 
-	@RequestParam("page") Optional<Integer> page, 
-	@RequestParam("size") Optional<Integer> size,
-	@RequestParam("sort") Optional<String> sort,
-	@RequestParam("dir") Optional<Sort.Direction> dir){
-		int currentPage = page.orElse(0);
-		int pageSize = size.orElse(10);
-		String sortColumn = sort.orElse("customerId");
-		Sort.Direction sortDirection = dir.orElse(Sort.Direction.ASC);
+		@RequestParam(value="page", defaultValue="0", required = false) Integer page, 
+		@RequestParam(value="size", defaultValue="10", required = false) Integer size,
+		@RequestParam(value="name", defaultValue="customerId", required = false) String column, 
+		@RequestParam(value="sort", defaultValue="ASC", required = false) Sort.Direction direction 
+	){		
 		ModelAndView mav = new ModelAndView("customers");
-		mav.addObject("customers", customerRepository.findAll(PageRequest.of(currentPage, pageSize).withSort(Sort.by(sortDirection, sortColumn))));
+		Pageable pageable = PageRequest.of(page, size, direction, column);
+		System.out.println(customerRepository.findAll(pageable).getSort().getOrderFor("name"));
+		mav.addObject("customers", customerRepository.findAll(pageable));
 		return mav;
 	}
 
