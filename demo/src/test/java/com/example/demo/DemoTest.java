@@ -2,12 +2,9 @@ package com.example.demo;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-//import org.junit.Test;
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.After;
-import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -29,12 +26,6 @@ public class DemoTest {
 	    
 	    driver.manage().window().setSize(new Dimension(522, 229));
 	    
-  }
-  
-  @Before
-  public void before() {
-	  // this runs before each test
-	  System.out.println("before test...");
   }
   
   @Test
@@ -67,12 +58,6 @@ public class DemoTest {
     
   }
   
-  @After
-  public void after() {
-	  // this runs after each test
-	  
-  }
-
   @AfterAll
   public static void afterAll() {
 	  // this runs once, after all tests
