@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
     <head>
     	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    	
         <title>Customers</title>
     </head>
     <body>
@@ -13,6 +14,7 @@
 					<th><a th:with="dir=${customers.getSort().getOrderFor('address')} == null ? ASC : ( ${customers.getSort().getOrderFor('address').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=address + ',' + ${dir})}">Address</a></th>
 					<th><a th:with="dir=${customers.getSort().getOrderFor('website')} == null ? ASC : ( ${customers.getSort().getOrderFor('website').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=website + ',' + ${dir})}">Website</a></th>
 					<th><a th:with="dir=${customers.getSort().getOrderFor('creditLimit')} == null ? ASC : ( ${customers.getSort().getOrderFor('creditLimit').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=creditLimit + ',' + ${dir})}">Credit Limit</a></th>
+					<th align="center" colspan="2"><a th:href="@{/customer/form}"><i class="fa fa-edit"></a></th>
     			</tr>
     		</thead>
     		<tr th:each=" customer : ${customers} ">
@@ -21,6 +23,8 @@
     			<td th:text="${customer.address}"></td>
     			<td><a th:href="${customer.website}" th:text="${customer.website}"></a></td>
     			<td align="right" th:text="${customer.creditLimit}"></td>
+				<td><a th:href="@{/customer/form/{id}(id=${customer.customerId})}"><i class="fa fa-edit"></a></td>
+				<td><a th:href="@{/customer/delete/{id}(id=${customer.customerId})}" onclick="return confirm('Are you sure you want to delete this?')"><i class="fa fa-trash"></a></td>    			
     		</tr>
     	</table>
     	

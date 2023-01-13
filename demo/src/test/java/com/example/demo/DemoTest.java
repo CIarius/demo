@@ -18,50 +18,63 @@ public class DemoTest {
 	  
 	  // this runs once, before anything else
 	  
-		System.out.println("before class, initializing driver...");
+		System.out.println("before all, initializing driver...");
 		
 		driver = new EdgeDriver();
 		  
 	    driver.get("http://localhost:8080/customers");
 	    
-	    driver.manage().window().setSize(new Dimension(522, 229));
+	    driver.manage().window().setSize(new Dimension(512, 229));
+	    
+  }
+  
+  @Test
+  public void noUsernameNoPassword() {
+
+		System.out.println("testing: no username, no password...");
+		
+	    driver.findElement(By.cssSelector("body > div > form > div:nth-child(4) > div > button")).click();
+	    
+	    assertEquals(new String("http://localhost:8080/login?error"), driver.getCurrentUrl());
 	    
   }
   
   @Test
   public void wrongPassword() {
 	  
-	System.out.println("testing with wrong password...");
+	System.out.println("testing: right username, wrong password...");
 	
     driver.findElement(By.name("username")).sendKeys("user");
     
-    driver.findElement(By.name("password")).sendKeys("user");
+    driver.findElement(By.name("password")).sendKeys("someword");
     
-    driver.findElement(By.cssSelector("div > input")).click();
+    driver.findElement(By.cssSelector("body > div > form > div:nth-child(4) > div > button")).click();
     
-    assertEquals(new String("Invalid username and password."), driver.findElement(By.id("message")).getText());
+    assertEquals(new String("http://localhost:8080/login?error"), driver.getCurrentUrl());
+    
+    assertNotNull(driver.findElement(By.cssSelector("div[class*='alert-danger']")));
     
   }
   
   @Test
   public void rightPassword() {
 
-    System.out.println("testing with right password...");
+    System.out.println("testing: right username, right password...");
     
     driver.findElement(By.name("username")).sendKeys("user");
     
     driver.findElement(By.name("password")).sendKeys("password");
     
-    driver.findElement(By.cssSelector("div > input")).click();
+    driver.findElement(By.cssSelector("body > div > form > div:nth-child(4) > div > button")).click();
     
-    assertEquals(new String("Credit Limit"), driver.findElement(By.linkText("Credit Limit")).getText());
+    assertNotNull(driver.findElement(By.linkText("Credit Limit")).getText());
     
   }
   
   @AfterAll
   public static void afterAll() {
 	  // this runs once, after all tests
-	  System.out.println("after class, quitting driver...");
+	  System.out.println("after all, quitting driver...");
 	  driver.quit();	  
   }
   
