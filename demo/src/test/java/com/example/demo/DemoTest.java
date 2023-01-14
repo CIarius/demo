@@ -22,7 +22,7 @@ public class DemoTest {
 		
 		driver = new EdgeDriver();
 		  
-	    driver.get("http://localhost:8080/customers");
+	    driver.get("http://localhost:8080/customers/list");
 	    
 	    driver.manage().window().setSize(new Dimension(512, 229));
 	    
