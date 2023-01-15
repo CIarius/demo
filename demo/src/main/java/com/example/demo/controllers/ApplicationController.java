@@ -33,13 +33,8 @@ public class ApplicationController {
 		return "hello";
 	}
 
-	@GetMapping("/customers")
-	public Iterable<Customer> Customers(){		
-		return customerRepository.findAll();
-	}
-	
 	@GetMapping("/customers/list")
-	public ModelAndView Customers(Model model, Pageable pageable){		
+	public ModelAndView CustomersList(Model model, Pageable pageable){		
 		ModelAndView mav = new ModelAndView("customers");
 		mav.addObject("customers", customerRepository.findAll(pageable));
 		return mav;

@@ -10,11 +10,11 @@
     	<table class="table table-bordered table-hover table=responsive table-striped">
     		<thead>
     			<tr>
-					<th><a th:with="dir=${customers.getSort().getOrderFor('customerId')} == null ? ASC : ( ${customers.getSort().getOrderFor('customerId').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=customerId + ',' + ${dir})}" title="click to sort">#</a></th>    				
-					<th><a th:with="dir=${customers.getSort().getOrderFor('name')} == null ? ASC : ( ${customers.getSort().getOrderFor('name').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=name + ',' + ${dir})}" title="click to sort">Name</a></th>
-					<th><a th:with="dir=${customers.getSort().getOrderFor('address')} == null ? ASC : ( ${customers.getSort().getOrderFor('address').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=address + ',' + ${dir})}" title="click to sort">Address</a></th>
-					<th><a th:with="dir=${customers.getSort().getOrderFor('website')} == null ? ASC : ( ${customers.getSort().getOrderFor('website').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=website + ',' + ${dir})}" title="click to sort">Website</a></th>
-					<th><a th:with="dir=${customers.getSort().getOrderFor('creditLimit')} == null ? ASC : ( ${customers.getSort().getOrderFor('creditLimit').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers(size=${customers.size}, sort=creditLimit + ',' + ${dir})}" title="click to sort">Credit Limit</a></th>
+					<th><a th:with="dir=${customers.getSort().getOrderFor('customerId')} == null ? ASC : ( ${customers.getSort().getOrderFor('customerId').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers/list(size=${customers.size}, sort=customerId + ',' + ${dir})}" title="click to sort">#</a></th>    				
+					<th><a th:with="dir=${customers.getSort().getOrderFor('name')} == null ? ASC : ( ${customers.getSort().getOrderFor('name').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers/list(size=${customers.size}, sort=name + ',' + ${dir})}" title="click to sort">Name</a></th>
+					<th><a th:with="dir=${customers.getSort().getOrderFor('address')} == null ? ASC : ( ${customers.getSort().getOrderFor('address').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers/list(size=${customers.size}, sort=address + ',' + ${dir})}" title="click to sort">Address</a></th>
+					<th><a th:with="dir=${customers.getSort().getOrderFor('website')} == null ? ASC : ( ${customers.getSort().getOrderFor('website').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers/list(size=${customers.size}, sort=website + ',' + ${dir})}" title="click to sort">Website</a></th>
+					<th><a th:with="dir=${customers.getSort().getOrderFor('creditLimit')} == null ? ASC : ( ${customers.getSort().getOrderFor('creditLimit').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/customers/list(size=${customers.size}, sort=creditLimit + ',' + ${dir})}" title="click to sort">Credit Limit</a></th>
 					<th align="center" colspan="2"><a th:href="@{/customer/form}" title="create"><i class="fa fa-edit"></a></th>
     			</tr>
     		</thead>
@@ -30,10 +30,10 @@
     	</table>
     	
 		<div th:if="${customers.totalPages > 0}" th:with="sort=(${customers.getSort().toString().replace(',', '&sort=').replace(': ', ',')}=='UNSORTED')?'':${customers.getSort().toString().replace(',', '&sort=').replace(': ', ',')}">
-			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=0, sort=${sort})}" title="first page">|&lt;</a>
-			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=${customers.number} > 0 ? ${customers.number}-1 : 0, sort=${sort})}" title="previous page">&lt;</a>
-			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=${customers.number} < ${customers.totalPages}-1 ? ${customers.number}+1 : ${customers.totalPages}-1, sort=${sort})}" title="next page">&gt;</a>
-			<a class="btn btn-primary" th:href="@{/customers(size=${customers.size}, page=${customers.totalPages}-1, sort=${sort})}" title="last page">&gt;|</a>
+			<a class="btn btn-primary" th:href="@{/customers/list(size=${customers.size}, page=0, sort=${sort})}" title="first page">|&lt;</a>
+			<a class="btn btn-primary" th:href="@{/customers/list(size=${customers.size}, page=${customers.number} > 0 ? ${customers.number}-1 : 0, sort=${sort})}" title="previous page">&lt;</a>
+			<a class="btn btn-primary" th:href="@{/customers/list(size=${customers.size}, page=${customers.number} < ${customers.totalPages}-1 ? ${customers.number}+1 : ${customers.totalPages}-1, sort=${sort})}" title="next page">&gt;</a>
+			<a class="btn btn-primary" th:href="@{/customers/list(size=${customers.size}, page=${customers.totalPages}-1, sort=${sort})}" title="last page">&gt;|</a>
 		</div>    	
 
     </body>
