@@ -12,7 +12,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 public class DemoTest {
 	
   private static EdgeDriver driver;
-  
+  private static String portNo = ( System.getProperty("portNo") == null ) ? "8080" : System.getProperty("portNo");
+	
   @BeforeAll
   public static void beforeAll() {
 	  
@@ -20,9 +21,13 @@ public class DemoTest {
 	  
 		System.out.println("before all, initializing driver...");
 		
+	    System.out.println("********** portNo = " + System.getProperty("portNo") + "**********");
+	    
 		driver = new EdgeDriver();
+		
+		String url = String.format("http://localhost:%s/customers/list", portNo);
 		  
-	    driver.get("http://localhost:8080/customers/list");
+	    driver.get(url);
 	    
 	    driver.manage().window().setSize(new Dimension(512, 229));
 	    
@@ -35,7 +40,7 @@ public class DemoTest {
 		
 	    driver.findElement(By.cssSelector("body > div > form > div:nth-child(4) > div > button")).click();
 	    
-	    assertEquals(new String("http://localhost:8080/login?error"), driver.getCurrentUrl());
+	    assertEquals(String.format("http://localhost:%s/login?error", portNo), driver.getCurrentUrl());
 	    
   }
   
@@ -50,7 +55,7 @@ public class DemoTest {
     
     driver.findElement(By.cssSelector("body > div > form > div:nth-child(4) > div > button")).click();
     
-    assertEquals(new String("http://localhost:8080/login?error"), driver.getCurrentUrl());
+    assertEquals(String.format("http://localhost:%s/login?error", portNo), driver.getCurrentUrl());
     
     assertNotNull(driver.findElement(By.cssSelector("div[class*='alert-danger']")));
     
