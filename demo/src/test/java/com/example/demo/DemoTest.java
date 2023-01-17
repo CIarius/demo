@@ -12,7 +12,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 public class DemoTest {
 	
   private static EdgeDriver driver;
-  private static String portNo = ( System.getenv().get("portNo") == null ) ? "8080" : System.getenv().get("portNo");
+  private static String portNo = ( System.getProperty("portNo") == null ) ? "8080" : System.getProperty("portNo");
 	
   @BeforeAll
   public static void beforeAll() {
@@ -80,7 +80,12 @@ public class DemoTest {
   public static void afterAll() {
 	  // this runs once, after all tests
 	  System.out.println("after all, quitting driver...");
-	  driver.quit();	  
+	  driver.quit();	
+
+		System.out.println("portNo="+System.getenv().get("portNo"));
+
+		System.out.println("portNo="+System.getProperty("portNo"));
+	  
   }
   
 }
