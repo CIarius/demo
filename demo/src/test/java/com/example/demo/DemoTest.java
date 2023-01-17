@@ -23,6 +23,8 @@ public class DemoTest {
 		
 	    System.out.println("********** portNo = " + portNo + " **********");
 	    
+	    System.setProperty("webdriver.edge.driver", "C:\\Development\\edgedriver_win64\\msedgedriver.exe");
+	    
 		driver = new EdgeDriver();
 		
 		String url = String.format("http://localhost:%s/employees/list", portNo);
