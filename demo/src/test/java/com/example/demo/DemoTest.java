@@ -80,7 +80,7 @@ public class DemoTest {
   public static void afterAll() {
 	  // this runs once, after all tests
 	  System.out.println("after all, quitting driver...");
-	  driver.quit();	
+	  //driver.quit();	
 
 		System.out.println("FYI - used portNo " + portNo + " for this test.");
 	  
