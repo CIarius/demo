@@ -29,7 +29,7 @@ public class DemoTest {
 		  
 	    driver.get(url);
 	    
-	    driver.manage().window().setSize(new Dimension(512, 229));
+	    //driver.manage().window().setSize(new Dimension(512, 229));
 	    
   }
   
@@ -82,11 +82,7 @@ public class DemoTest {
 	  System.out.println("after all, quitting driver...");
 	  driver.quit();	
 
-		System.out.println("portNo="+System.getenv().get("portNo"));
-
-		System.out.println("portNo="+System.getProperty("portNo"));
-		
-		System.out.println("********** portNo = " + portNo + " **********");
+		System.out.println("FYI - used portNo " + portNo + " for this test.");
 	  
   }
   
