@@ -13,7 +13,7 @@ import com.example.demo.entities.Customer;
 import com.example.demo.repositories.CustomerRepository;
 
 @Controller
-public class ApplicationController {
+public class CustomersController {
 	
 	@Autowired
 	private CustomerRepository customerRepository;

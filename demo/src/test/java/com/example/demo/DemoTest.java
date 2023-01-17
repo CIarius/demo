@@ -12,7 +12,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 public class DemoTest {
 	
   private static EdgeDriver driver;
-  private static String portNo = ( System.getProperty("portNo") == null ) ? "8080" : System.getProperty("portNo");
+  private static String portNo = ( System.getenv().get("portNo") == null ) ? "8080" : System.getenv().get("portNo");
 	
   @BeforeAll
   public static void beforeAll() {
@@ -21,7 +21,7 @@ public class DemoTest {
 	  
 		System.out.println("before all, initializing driver...");
 		
-	    System.out.println("********** portNo = " + System.getProperty("portNo") + "**********");
+	    System.out.println("********** portNo = " + portNo + " **********");
 	    
 		driver = new EdgeDriver();
 		

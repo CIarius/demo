@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Customer</title>
+</head>
+<body>
+
+	<div class="container">
+	
+		<h2>Customer Details</h2>
+	
+		<form class="form-horizontal" method="post" th:action="@{/employee/update}" th:object="${employee}">
+		
+			<input id="id" th:field="*{id}" type="hidden"/>
+<!-- 
+			<div class="form-group">		 	
+				<label for="titleId">Gender:</label>
+				<select class="form-control" id="titleId" placeholder="title" th:field="*{title.id}" type="text">
+					<option th:each="title:${titles}" th:value="${title.id}" th:text="${title.name}"></option>
+				</select>
+			</div>			
+ -->			 	
+			<div class="form-group">		 	
+				<label for="forename">Forename:</label>
+				<input class="form-control" id="forename" placeholder="forename" th:field="*{forename}" type="text"/>
+			</div>			
+			
+			<div class="form-group">		 	
+				<label for="surname">Surname:</label>
+				<input class="form-control" id="surname" placeholder="surname" th:field="*{surname}" type="text"/>
+			</div>			
+
+			<div class="form-group">		 	
+				<label for="genderId">Gender:</label>
+				<select class="form-control" id="genderId" placeholder="gender" th:field="*{gender.id}" type="text">
+					<option th:each="gender : ${genders}" th:value="${gender.id}" th:text="${gender.name}"></option>
+				</select>
+			</div>			
+
+			<div class="form-group">		 	
+				<label for="dateOfBirth">Date of Birth:</label>
+				<input class="form-control" id="dateOfBirth" placeholder="date of birth" th:field="*{dateOfBirth}" type="text"/>
+			</div>			
+
+			<div class="form-group">		 	
+				<label for="dateOfHire">Date of hire:</label>
+				<input class="form-control" id="dateOfHire" placeholder="date of hire" th:field="*{dateOfHire}" type="text"/>
+			</div>			
+
+			<div class="form-group">		 	
+				<label for="departmentId">Gender:</label>
+				<select class="form-control" id="genderId" placeholder="gender" th:field="*{gender.id}" type="text">
+					<option th:each="gender : ${genders}" th:value="${gender.id}" th:text="${gender.name}"></option>
+				</select>
+			</div>			
+
+			<div class="form-group">		 	
+				<label for="roleId">Role:</label>
+				<input class="form-control" id="roleId" placeholder="role" th:field="*{role.id}" type="text"/>
+			</div>			
+
+			<div class="form-group">		 	
+				<label for="shiftId">Shift:</label>
+				<input class="form-control" id="shiftId" placeholder="shift" th:field="*{shift.id}" type="text"/>
+			</div>			
+			
+			<input type="submit" value="submit"/>
+			 
+		</form>
+		
+	</div>
+	
+</body>
+</html>

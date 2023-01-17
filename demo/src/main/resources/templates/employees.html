@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    	
+        <title>Customers</title>
+    </head>
+    <body>
+    
+    	<table class="table table-bordered table-hover table=responsive table-striped">
+    		<thead>
+    			<tr>
+					<th><a th:with="dir=${employees.getSort().getOrderFor('id')} == null ? ASC : ( ${employees.getSort().getOrderFor('id').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/employees/list(size=${employees.size}, sort=id + ',' + ${dir})}" title="click to sort">#</a></th>    				
+					<th><a th:with="dir=${employees.getSort().getOrderFor('title.name')} == null ? ASC : ( ${employees.getSort().getOrderFor('titleId').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/employees/list(size=${employees.size}, sort=titleId + ',' + ${dir})}" title="click to sort">Title</a></th>    				
+					<th><a th:with="dir=${employees.getSort().getOrderFor('forename')} == null ? ASC : ( ${employees.getSort().getOrderFor('forename').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/employees/list(size=${employees.size}, sort=forename + ',' + ${dir})}" title="click to sort">Forename</a></th>
+					<th><a th:with="dir=${employees.getSort().getOrderFor('surname')} == null ? ASC : ( ${employees.getSort().getOrderFor('surname').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/employees/list(size=${employees.size}, sort=surname + ',' + ${dir})}" title="click to sort">Surname</a></th>
+					<th><a th:with="dir=${employees.getSort().getOrderFor('gender.name')} == null ? ASC : ( ${employees.getSort().getOrderFor('gender.name').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/employees/list(size=${employees.size}, sort=gender.name + ',' + ${dir})}" title="click to sort">Gender</a></th>
+					<th><a th:with="dir=${employees.getSort().getOrderFor('dateOfBirth')} == null ? ASC : ( ${employees.getSort().getOrderFor('dateOfBirth').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/employees/list(size=${employees.size}, sort=dateOfBirth + ',' + ${dir})}" title="click to sort">Date of Birth</a></th>
+					<th><a th:with="dir=${employees.getSort().getOrderFor('dateOfHire')} == null ? ASC : ( ${employees.getSort().getOrderFor('dateOfHire').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/employees/list(size=${employees.size}, sort=dateOfHire + ',' + ${dir})}" title="click to sort">Date of Hire</a></th>
+					<th><a th:with="dir=${employees.getSort().getOrderFor('department.name')} == null ? ASC : ( ${employees.getSort().getOrderFor('department.name').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/employees/list(size=${employees.size}, sort=department.name + ',' + ${dir})}" title="click to sort">Department</a></th>
+					<th><a th:with="dir=${employees.getSort().getOrderFor('role.name')} == null ? ASC : ( ${employees.getSort().getOrderFor('role.name').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/employees/list(size=${employees.size}, sort=role.name + ',' + ${dir})}" title="click to sort">Role</a></th>
+					<th><a th:with="dir=${employees.getSort().getOrderFor('shift.name')} == null ? ASC : ( ${employees.getSort().getOrderFor('shiftId').getDirection().isAscending()} ? DESC : ASC )" th:href="@{/employees/list(size=${employees.size}, sort=shiftId + ',' + ${dir})}" title="click to sort">Shift</a></th>
+					<th align="center" colspan="2"><a th:href="@{/employee/form}" title="create"><i class="fa fa-edit"></a></th>
+    			</tr>
+    		</thead>
+    		<tr th:each=" employee : ${employees} ">
+    		
+    			<td th:text="${employee.id}"></td>
+    			<td th:text="${employee.title.name}"></td>
+    			<td th:text="${employee.forename}"></td>
+    			<td th:text="${employee.surname}"></td>
+    			<td th:text="${employee.gender.name}"></td>
+    			<td th:text="${employee.dateOfBirth}"></td>
+    			<td th:text="${employee.dateOfHire}"></td>
+    			<td th:text="${employee.department.name}"></td>
+    			<td th:text="${employee.role.name}"></td>
+    			<td th:text="${employee.shift.name}"></td>
+    			
+				<td><a th:href="@{/employee/form/{id}(id=${employee.id})}" title="update"><i class="fa fa-edit"></a></td>
+				<td><a th:href="@{/employee/delete/{id}(id=${employee.id})}" onclick="return confirm('Are you sure you want to delete this?')" title="delete"><i class="fa fa-trash"></a></td>
+				    			
+    		</tr>
+    	</table>
+    	
+		<div th:if="${employees.totalPages > 0}" th:with="sort=(${employees.getSort().toString().replace(',', '&sort=').replace(': ', ',')}=='UNSORTED')?'':${employees.getSort().toString().replace(',', '&sort=').replace(': ', ',')}">
+			<a class="btn btn-primary" th:href="@{/employees/list(size=${employees.size}, page=0, sort=${sort})}" title="first page">|&lt;</a>
+			<a class="btn btn-primary" th:href="@{/employees/list(size=${employees.size}, page=${employees.number} > 0 ? ${employees.number}-1 : 0, sort=${sort})}" title="previous page">&lt;</a>
+			<a class="btn btn-primary" th:href="@{/employees/list(size=${employees.size}, page=${employees.number} < ${employees.totalPages}-1 ? ${employees.number}+1 : ${employees.totalPages}-1, sort=${sort})}" title="next page">&gt;</a>
+			<a class="btn btn-primary" th:href="@{/employees/list(size=${employees.size}, page=${employees.totalPages}-1, sort=${sort})}" title="last page">&gt;|</a>
+		</div>    	
+
+    </body>
+</html>
