@@ -23,15 +23,17 @@ public class DemoTest {
 		
 	    System.out.println("********** portNo = " + portNo + " **********");
 	    
-	    System.setProperty("webdriver.edge.driver", "C:\\Development\\edgedriver_win64\\msedgedriver.exe");
+	    System.setProperty("webdriver.edge.driver", "C:\\Development\\edgedriver_win32\\msedgedriver.exe");
 	    
+		String url = String.format("http://localhost:%s/employees/list", portNo);
+		
+		System.out.println("********** url = " + url + " **********");
+		  
 		driver = new EdgeDriver();
 		
-		String url = String.format("http://localhost:%s/employees/list", portNo);
-		  
 	    driver.get(url);
 	    
-	    //driver.manage().window().setSize(new Dimension(512, 229));
+	    driver.manage().window().setSize(new Dimension(512, 229));
 	    
   }
   
