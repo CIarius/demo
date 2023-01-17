@@ -25,7 +25,7 @@ public class DemoTest {
 	    
 		driver = new EdgeDriver();
 		
-		String url = String.format("http://localhost:%s/customers/list", portNo);
+		String url = String.format("http://localhost:%s/employees/list", portNo);
 		  
 	    driver.get(url);
 	    
@@ -72,7 +72,7 @@ public class DemoTest {
     
     driver.findElement(By.cssSelector("body > div > form > div:nth-child(4) > div > button")).click();
     
-    assertNotNull(driver.findElement(By.linkText("Credit Limit")).getText());
+    assertNotNull(driver.findElement(By.linkText("Date of Birth")).getText());
     
   }
   
